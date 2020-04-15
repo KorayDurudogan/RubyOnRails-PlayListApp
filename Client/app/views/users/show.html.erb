@@ -1,0 +1,34 @@
+<style>
+  b {
+    margin-right: 3px;
+  }
+  span.glyphicon {
+      cursor: pointer;
+  }
+
+    ul{
+      display: none;
+    }
+</style>
+
+<h1>User PlayList</h1>
+<%= render partial: "detail", locals: { user: @user } %>
+<hr>
+<div class="well">
+  <% @selected_playlists.each do |playlist| %>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span><b>PlayList:</b><%= playlist.name %></span>
+      <hr>
+        <% playlist.mp3_ids.each do |song_id| %>
+        <ul>
+          <% @song = (@songs_list.select { |current_song| current_song.id == song_id }).first %>
+          <%= render partial: "songs/song", locals: { song: @song } %>
+        </ul>
+        <% end %>
+  <% end %>
+</div>
+<script>
+  $("span.glyphicon").click(function () {
+      $(this).nextUntil("span.glyphicon.glyphicon-chevron-right").filter("ul").slideToggle();
+  });
+</script>

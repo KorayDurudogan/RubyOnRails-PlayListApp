@@ -1,0 +1,9 @@
+<h1>Users</h1>
+
+<% @users.each do |user| %>
+  <hr>
+  <div style="float: right; margin: 10px">
+    <%= link_to("View Playlist", user_path(user.id), :class => 'btn btn-default') %>
+  </div>
+  <%= render partial: "detail", locals: { user: user } %>
+<% end %>
